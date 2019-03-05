@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[使用GitPages+Hexo搭建并开通博客]]></title>
+    <url>%2F2019%2F03%2F05%2F%E4%BD%BF%E7%94%A8GitPages-Hexo%E6%90%AD%E5%BB%BA%E5%B9%B6%E5%BC%80%E9%80%9A%E5%8D%9A%E5%AE%A2%2F</url>
+    <content type="text"><![CDATA[博客制作总结参考B站教学视频手把手教你搭建属于自己的hexo+github博客使用Next主题来进行优化改造 1、工具准备：node.js和Git的安装2、安装 Sublime text 3作为编辑各种文件的工具 Sublime text 3 下载地址 3、创建GitHub仓库 Repository name：注册用户名.github.io（.github.io为强制要求） Description（仓库描述）：选填。 Public：勾选，表示可以供他人访问。 Initialize this repository with a README：可选。最后点击 create repository 即可。 4、配置GitHubSSH将本地项目部署到GitHub，修改站点下的_config.yml文件1234deploy: type: git repo: git@github.com:Soung1998/Soung1998.github.io.git branch: master 5、常用Git命令（备忘）1234hexo clean //有时候出调试没反应可以尝试清除缓存hexo s //打开服务hexo g //再键入hexo d 为将本地项目更新部署到GitHub上hexo d 6、Next主题使用这里采用使用比较多的主题：NexT主题。参考博客的第二个视频。]]></content>
+      <categories>
+        <category>博客制作</category>
+      </categories>
+      <tags>
+        <tag>分享</tag>
+        <tag>博客制作</tag>
+      </tags>
+  </entry>
+</search>
