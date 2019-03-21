@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="SpringMVC,">
+  <meta name="keywords" content="java基础,">
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="处理器拦截器简介Spring Web MVC的处理器拦截器（如无特殊说明，下文所说的拦截器即处理器拦截器）类似于Servlet开发中的过滤器Filter，用于对处理器进行预处理和后处理。">
-<meta name="keywords" content="SpringMVC">
+<meta name="description" content="运行速度的区别 运行速度快慢为：StringBuilder &amp;gt; StringBuffer &amp;gt; String">
+<meta name="keywords" content="java基础">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SpringMVC-拦截器">
-<meta property="og:url" content="https://Soung1998.github.io/2019/03/14/SpringMVC-拦截器/index.html">
+<meta property="og:title" content="java基础-String、StringBuilder和StringBuffer">
+<meta property="og:url" content="https://Soung1998.github.io/2019/03/21/java基础-String、StringBuilder和StringBuffer/index.html">
 <meta property="og:site_name" content="Soung&#39;blog">
-<meta property="og:description" content="处理器拦截器简介Spring Web MVC的处理器拦截器（如无特殊说明，下文所说的拦截器即处理器拦截器）类似于Servlet开发中的过滤器Filter，用于对处理器进行预处理和后处理。">
+<meta property="og:description" content="运行速度的区别 运行速度快慢为：StringBuilder &amp;gt; StringBuffer &amp;gt; String">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-03-14T05:28:45.809Z">
+<meta property="og:updated_time" content="2019-03-21T03:03:39.244Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SpringMVC-拦截器">
-<meta name="twitter:description" content="处理器拦截器简介Spring Web MVC的处理器拦截器（如无特殊说明，下文所说的拦截器即处理器拦截器）类似于Servlet开发中的过滤器Filter，用于对处理器进行预处理和后处理。">
+<meta name="twitter:title" content="java基础-String、StringBuilder和StringBuffer">
+<meta name="twitter:description" content="运行速度的区别 运行速度快慢为：StringBuilder &amp;gt; StringBuffer &amp;gt; String">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="https://Soung1998.github.io/2019/03/14/SpringMVC-拦截器/">
+  <link rel="canonical" href="https://Soung1998.github.io/2019/03/21/java基础-String、StringBuilder和StringBuffer/">
 
 
 
 
 
-  <title>SpringMVC-拦截器 | Soung'blog</title>
+  <title>java基础-String、StringBuilder和StringBuffer | Soung'blog</title>
   
 
 
@@ -285,7 +285,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://Soung1998.github.io/2019/03/14/SpringMVC-拦截器/">
+    <link itemprop="mainEntityOfPage" href="https://Soung1998.github.io/2019/03/21/java基础-String、StringBuilder和StringBuffer/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Soung">
@@ -302,7 +302,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">SpringMVC-拦截器</h1>
+          <h1 class="post-title" itemprop="name headline">java基础-String、StringBuilder和StringBuffer</h1>
         
 
         <div class="post-meta">
@@ -314,8 +314,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-14T11:29:00+08:00">
-                2019-03-14
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-21T10:55:28+08:00">
+                2019-03-21
               </time>
             
 
@@ -337,8 +337,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/SpringMVC/" itemprop="url" rel="index">
-                    <span itemprop="name">SpringMVC</span>
+                  <a href="/categories/java基础/" itemprop="url" rel="index">
+                    <span itemprop="name">java基础</span>
                   </a>
                 </span>
 
@@ -355,8 +355,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/03/14/SpringMVC-拦截器/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/03/14/SpringMVC-拦截器/" itemprop="commentCount"></span>
+                <a href="/2019/03/21/java基础-String、StringBuilder和StringBuffer/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/03/21/java基础-String、StringBuilder和StringBuffer/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -389,15 +389,20 @@
       
 
       
-        <h1 id="处理器拦截器简介"><a href="#处理器拦截器简介" class="headerlink" title="处理器拦截器简介"></a>处理器拦截器简介</h1><p>Spring Web MVC的处理器拦截器（如无特殊说明，下文所说的拦截器即处理器拦截器）<br>类似于Servlet开发中的过滤器Filter，用于对处理器进行预处理和后处理。<br><a id="more"></a></p>
-<h1 id="常见应用场景"><a href="#常见应用场景" class="headerlink" title="常见应用场景"></a>常见应用场景</h1><p><code>1、日志记录：记录请求信息的日志，以便进行信息监控、信息统计、计算PV（Page View）等。</code><br><code>2、权限检查：如登录检测，进入处理器检测检测是否登录，如果没有直接返回到登录页面。</code><br><code>3、性能监控：有时候系统在某段时间莫名其妙的慢，可以通过拦截器在进入处理器之前记录开始时间，在处理完后记录结束时间，从而得到该请求的处理时间（如果有反向代理，如apache可以自动记录）。</code><br><code>4、通用行为：读取cookie得到用户信息并将用户对象放入请求，从而方便后续流程使用，还有如提取Locale、Theme信息等，只要是多个处理器都需要的即可使用拦截器实现。</code><br><code>5、OpenSessionInView：如Hibernate，在进入处理器打开Session，在完成后关闭Session。
-本质也是AOP（面向切面编程），也就是说符合横切关注点的所有功能都可以放入拦截器实现。</code></p>
-<h1 id="拦截器的执行过程"><a href="#拦截器的执行过程" class="headerlink" title="拦截器的执行过程"></a>拦截器的执行过程</h1><p><a href="https://img-blog.csdn.net/20180410223229779?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM4MjAwNTQ4/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" target="_blank" rel="noopener">执行顺序图片详解</a><br><code>当页面的request请求发送过来,由前端控制器DispatcherServlet来控制,交给对应的Controller进行请求的处理,但是在处理之前,要先经过拦截器的拦截(如果配置了的话)。</code></p>
-<h2 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h2><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> org.springframework.web.servlet;  </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">HandlerInterceptor</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">boolean</span> preHandle(  </span><br><span class="line">            HttpServletRequest request, HttpServletResponse response,   </span><br><span class="line">            Object <span class="keyword">handler</span>)   </span><br><span class="line">            <span class="keyword">throws</span> Exception;  </span><br><span class="line">  </span><br><span class="line">    <span class="keyword">void</span> postHandle(  </span><br><span class="line">            HttpServletRequest request, HttpServletResponse response,   </span><br><span class="line">            Object <span class="keyword">handler</span>, ModelAndView modelAndView)   </span><br><span class="line">            <span class="keyword">throws</span> Exception;  </span><br><span class="line">  </span><br><span class="line">    <span class="keyword">void</span> afterCompletion(  </span><br><span class="line">            HttpServletRequest request, HttpServletResponse response,   </span><br><span class="line">            Object <span class="keyword">handler</span>, Exception ex)  </span><br><span class="line">            <span class="keyword">throws</span> Exception;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>preHandle：预处理回调方法，实现处理器的预处理（如登录检查），第三个参数为响应的处理器（如我们上一章的Controller实现）；<br>     返回值：true表示继续流程（如调用下一个拦截器或处理器）；<br>            false表示流程中断（如登录检查失败），不会继续调用其他的拦截器或处理器，此时我们需要通过response来产生响应；</p>
-<p>postHandle：后处理回调方法，实现处理器的后处理（但在渲染视图之前），此时我们可以通过modelAndView（模型和视图对象）对模型数据进行处理或对视图进行处理，modelAndView也可能为null。</p>
-<p>afterCompletion：整个请求处理完毕回调方法，即在视图渲染完毕时回调，如性能监控中我们可以在此记录结束时间并输出消耗时间，还可以进行一些资源清理，类似于try-catch-finally中的finally，但仅调用处理器执行链中preHandle返回true的拦截器的afterCompletion。</p>
-<h1 id="拦截器链"><a href="#拦截器链" class="headerlink" title="拦截器链"></a>拦截器链</h1><p>拦截器在spring-configs.xml中的配置顺序即规定了拦截器链中各个拦截器的执行顺序。</p>
+        <h1 id="运行速度的区别"><a href="#运行速度的区别" class="headerlink" title="运行速度的区别"></a>运行速度的区别</h1><ul>
+<li>运行速度快慢为：StringBuilder &gt; StringBuffer &gt; String<a id="more"></a>
+<h2 id="String最慢的原因："><a href="#String最慢的原因：" class="headerlink" title="String最慢的原因："></a>String最慢的原因：</h2></li>
+</ul>
+<p>　　String为字符串常量，而StringBuilder和StringBuffer均为字符串变量，即String对象一旦创建之后该对象是不可更改的，但后两者的对象是变量，是可以更改的。</p>
+<p>但是在自己的实际编程中发现其实String对象是可“更改”的，原因如下<br><figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">String</span> <span class="built_in">str</span>=<span class="string">"abc"</span>;</span><br><span class="line">System.out.<span class="built_in">println</span>(<span class="built_in">str</span>);</span><br><span class="line"><span class="built_in">str</span>=<span class="built_in">str</span>+<span class="string">"de"</span>;</span><br><span class="line">System.out.<span class="built_in">println</span>(<span class="built_in">str</span>);</span><br></pre></td></tr></table></figure></p>
+<h2 id="其实str只是被覆盖了"><a href="#其实str只是被覆盖了" class="headerlink" title="其实str只是被覆盖了"></a>其实str只是被覆盖了</h2><p>如果运行这段代码会发现先输出“abc”，然后又输出“abcde”，好像是str这个对象被更改了，其实，这只是一种假象罢了，JVM对于这几行代码是这样处理的，首先创建一个String对象str，并把“abc”赋值给str，然后在第三行中，其实JVM又创建了一个新的对象也名为str，然后再把原来的str的值和“de”加起来再赋值给新的str，而原来的str就会被JVM的垃圾回收机制（GC）给回收掉了，所以，str实际上并没有被更改，也就是前面说的String对象一旦创建之后就不可更改了。所以，Java中对String对象进行的操作实际上是一个不断创建新的对象并且将旧的对象回收的一个过程，所以执行速度很慢。</p>
+<h1 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h1><p><code>在线程安全上，StringBuffer是线程安全的。StringBuilder是线程不安全的,在单线程中性能要比StringBuffrer高。</code></p>
+<p>例如：《Think in Java》中，描述HashTable和HashMap区别一样，就是因为HashTable支持线程同步、保证线程安全而导致的性能下降。</p>
+<p>　　HashTable是线程安全的，很多方法都是synchronized方法。</p>
+<p>　　HashMap不是线程安全的，但在单线程程序中的性能比HashTable要高。</p>
+<h1 id="适用场合"><a href="#适用场合" class="headerlink" title="适用场合"></a>适用场合</h1><p>String：适用于少量的字符串操作的情况</p>
+<p>StringBuilder：适用于单线程下在字符缓冲区进行大量操作的情况</p>
+<p>StringBuffer：适用多线程下在字符缓冲区进行大量操作的情况</p>
 
       
     </div>
@@ -415,7 +420,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/SpringMVC/" rel="tag"># SpringMVC</a>
+            <a href="/tags/java基础/" rel="tag"># java基础</a>
           
         </div>
       
@@ -428,8 +433,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/09/java基础-序列化/" rel="next" title="java基础-序列化">
-                <i class="fa fa-chevron-left"></i> java基础-序列化
+              <a href="/2019/03/16/java基础-枚举/" rel="next" title="java基础-枚举">
+                <i class="fa fa-chevron-left"></i> java基础-枚举
               </a>
             
           </div>
@@ -437,10 +442,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/03/15/ssm配置文件/" rel="prev" title="ssm配置文件">
-                ssm配置文件 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -587,7 +588,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#处理器拦截器简介"><span class="nav-number">1.</span> <span class="nav-text">处理器拦截器简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#常见应用场景"><span class="nav-number">2.</span> <span class="nav-text">常见应用场景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#拦截器的执行过程"><span class="nav-number">3.</span> <span class="nav-text">拦截器的执行过程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码"><span class="nav-number">3.1.</span> <span class="nav-text">源码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#拦截器链"><span class="nav-number">4.</span> <span class="nav-text">拦截器链</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#运行速度的区别"><span class="nav-number">1.</span> <span class="nav-text">运行速度的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#String最慢的原因："><span class="nav-number">1.1.</span> <span class="nav-text">String最慢的原因：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其实str只是被覆盖了"><span class="nav-number">1.2.</span> <span class="nav-text">其实str只是被覆盖了</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#线程安全"><span class="nav-number">2.</span> <span class="nav-text">线程安全</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#适用场合"><span class="nav-number">3.</span> <span class="nav-text">适用场合</span></a></li></ol></div>
             
 
           </div>
