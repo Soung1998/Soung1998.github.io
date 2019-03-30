@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Soung&#39;blog">
 <meta property="og:description" content="枚举当一个变量有几种可能的取值时，可以将它定义为枚举类型。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-03-17T03:40:48.611Z">
+<meta property="og:updated_time" content="2019-03-21T03:05:49.411Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java基础-枚举">
 <meta name="twitter:description" content="枚举当一个变量有几种可能的取值时，可以将它定义为枚举类型。">
@@ -398,7 +398,7 @@
 <p>在外部程序若要使用枚举类型直接调用如下<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">System</span><span class="selector-class">.out</span><span class="selector-class">.print</span>(<span class="selector-tag">SeasonEnum</span><span class="selector-class">.SPRING</span><span class="selector-class">.getDesc</span>());</span><br></pre></td></tr></table></figure></p>
 <h2 id="枚举类enum的values-方法"><a href="#枚举类enum的values-方法" class="headerlink" title="枚举类enum的values()方法"></a>枚举类enum的values()方法</h2><figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">System.out.<span class="keyword">print</span>(SeasonEnum.<span class="built_in">values</span>());</span><br><span class="line"><span class="comment">//结果为</span></span><br><span class="line">[LSeasonEnum;<span class="comment">@4a574795</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SeasonEnum[] arr = SeasonEnum.values();</span><br><span class="line">   System.out.<span class="keyword">print</span>(arr[<span class="number">0</span>]);</span><br><span class="line">   <span class="comment">//结果为</span></span><br><span class="line">   SPRING1:spring</span><br></pre></td></tr></table></figure>
-<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">for</span> (SeasonEnum <span class="attribute">seasonEnum </span>: SeasonEnum.values())&#123;</span><br><span class="line">       <span class="selector-tag">System</span><span class="selector-class">.out</span><span class="selector-class">.println</span>(seasonEnum.getState()+<span class="string">":"</span>+seasonEnum.getDesc());</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="comment">//结果为，其中中文乱码不至缘何，尚待学习</span></span><br><span class="line">   <span class="selector-tag">1</span><span class="selector-pseudo">:spring</span></span><br><span class="line"><span class="selector-tag">2</span>:澶忓ぉ</span><br><span class="line"><span class="selector-tag">3</span>:绉嬪ぉ</span><br><span class="line"><span class="selector-tag">4</span>:鍐ぉ</span><br></pre></td></tr></table></figure>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">for</span> (SeasonEnum <span class="attribute">seasonEnum </span>: SeasonEnum.values())&#123;</span><br><span class="line">       <span class="selector-tag">System</span><span class="selector-class">.out</span><span class="selector-class">.println</span>(seasonEnum.getState()+<span class="string">":"</span>+seasonEnum.getDesc());</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="comment">//结果为，idea编译器没修改统一的UTF-8而乱码</span></span><br><span class="line">   <span class="selector-tag">1</span><span class="selector-pseudo">:spring</span></span><br><span class="line"><span class="selector-tag">2</span>:澶忓ぉ</span><br><span class="line"><span class="selector-tag">3</span>:绉嬪ぉ</span><br><span class="line"><span class="selector-tag">4</span>:鍐ぉ</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -522,7 +522,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
