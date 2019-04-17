@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[ssm-图片上传]]></title>
+    <url>%2F2019%2F04%2F17%2Fssm-%E5%9B%BE%E7%89%87%E4%B8%8A%E4%BC%A0%2F</url>
+    <content type="text"><![CDATA[总结细数做文件上传和显示踩过的坑 1. 前端上传图片jsp用表单传值要注明1因为要注册注册完的页面的跳转所以用的ajax提交表单，在获取表单时可以使用```var formData = new FormData($(&quot;#registerForm&quot;)[0]);```一次性获取表单数据，就不用一个个append了。 data : formData,processData : false, //必须false才会避开jQuery对 formdata 的默认处理contentType : false, //必须false才会自动加上正确的Content-Type12345## 2. 上传文件的控制器直接获取文件用```@RequestParam(value="file") MultipartFile file```然后依次获取项目路径等等，拼凑文件名存入数据库。然后```调用MultipartFile对象的transferTo()方法```创建文件到本地磁盘## 3. 下载并且输出文件到jsp页面 @RequestMapping(value=”/getuserimage”) @ResponseBody private String getUserImage(HttpServletRequest request,HttpServletResponse response,Model model) { response.setContentType(“/jpeg”); User user = (User) request.getSession().getAttribute(&quot;user&quot;); File file = new File(user.getImage()); if(file.exists()) { try { InputStream in = new FileInputStream(user.getImage()); OutputStream os = response.getOutputStream(); byte[] b = new byte[1024]; while(in.read(b) != -1) { os.write(b); } in.close(); os.flush(); os.close(); } catch (Exception e) { e.printStackTrace(); } } return null; } 12其实可以封装成工具类，上传图片的功能也是。jsp显示图片用的是： `直接访问的控制器。 因为浏览器是不允许前端直接访问本地磁盘的文件，所以只能把本地文件做输出流到页面显示，使用SpringMVC的控制器。服务器问题当然最大的坑就是Tomcat重启的时候会删除webapps下面人工生成的文件，导致每次上传图片后过段时间图片就莫名其妙没了，后来找到解决办法很多说是只要不把图片文件放在webapps目录下就行，但链接中的方法更便捷，给工程配置虚拟路径，这样Tomcat启动时直接找工程了。]]></content>
+      <categories>
+        <category>ssm</category>
+      </categories>
+      <tags>
+        <tag>ssm</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[java基础-java值传递]]></title>
     <url>%2F2019%2F03%2F30%2Fjava%E5%9F%BA%E7%A1%80-java%E5%80%BC%E4%BC%A0%E9%80%92%2F</url>
     <content type="text"><![CDATA[总结java中方法参数传递方式是按值传递。如果参数是基本类型，传递的是基本类型的字面量值的拷贝。如果参数是引用类型，传递的是该参量所引用的对象在堆中地址值的拷贝。 代码示例1234567891011121314151617181920212223242526272829303132333435363738public class ReferencePkValue2 &#123; static class MyObj&#123; int num; public MyObj(int num) &#123; this.num = num; &#125; public int getNum() &#123; return num; &#125; public void setNum(int num) &#123; this.num = num; &#125; &#125; public static void main(String[] args) &#123; ReferencePkValue2 t = new ReferencePkValue2(); int a=99; t.test1(a);//这里传递的参数a就是按值传递 System.out.println(a); MyObj obj = new MyObj(111); t.test2(obj);//引用类型，这里传递的参数obj就是引用的拷贝 System.out.println(obj.num); &#125; public void test1(int a)&#123; a=a+1; System.out.println(a); &#125; public void test2(MyObj obj)&#123; obj.num=100; System.out.println(obj.num); &#125;&#125; 运行结果123410099100100]]></content>
