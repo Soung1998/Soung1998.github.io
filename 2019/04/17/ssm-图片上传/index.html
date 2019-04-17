@@ -87,12 +87,10 @@
 <meta property="og:site_name" content="Soung&#39;blog">
 <meta property="og:description" content="总结细数做文件上传和显示踩过的坑">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://localhost:8080/xiaoyuantong/user/getuserimage">
-<meta property="og:updated_time" content="2019-04-17T10:51:00.324Z">
+<meta property="og:updated_time" content="2019-04-17T10:54:55.936Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ssm-图片上传">
 <meta name="twitter:description" content="总结细数做文件上传和显示踩过的坑">
-<meta name="twitter:image" content="http://localhost:8080/xiaoyuantong/user/getuserimage">
 
 
 
@@ -392,31 +390,15 @@
 
       
         <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>细数做文件上传和显示踩过的坑<br><a id="more"></a></p>
-<h2 id="1-前端上传图片"><a href="#1-前端上传图片" class="headerlink" title="1. 前端上传图片"></a>1. 前端上传图片</h2><p>jsp用表单传值要注明<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">因为要注册注册完的页面的跳转所以用的ajax提交表单，在获取表单时可以使用```var formData = new FormData($(&quot;#registerForm&quot;)[0]);```一次性获取表单数据，就不用一个个append了。</span><br></pre></td></tr></table></figure></p>
-<p>data : formData,<br>processData : false, //必须false才会避开jQuery对 formdata 的默认处理<br>contentType : false, //必须false才会自动加上正确的Content-Type<br><figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">## <span class="number">2</span>. 上传文件的控制器</span><br><span class="line">直接获取文件用```@RequestParam(value=<span class="string">"file"</span>) MultipartFile file```然后依次获取项目路径等等，拼凑文件名存入数据库。然后</span><br><span class="line">```调用MultipartFile对象的transferTo()方法```创建文件到本地磁盘</span><br><span class="line"></span><br><span class="line">## <span class="number">3</span>. 下载并且输出文件到jsp页面</span><br></pre></td></tr></table></figure></p>
-<p>@RequestMapping(value=”/getuserimage”)<br>    @ResponseBody<br>    private String getUserImage(HttpServletRequest request,HttpServletResponse response,Model model) {<br>        response.setContentType(“/jpeg”);</p>
-<pre><code>    User user = (User) request.getSession().getAttribute(&quot;user&quot;);
-
-    File file = new File(user.getImage());
-    if(file.exists()) {
-        try {
-            InputStream in = new FileInputStream(user.getImage());
-            OutputStream os = response.getOutputStream();
-            byte[] b = new byte[1024];
-            while(in.read(b) != -1) {
-                os.write(b);
-            }
-            in.close();
-            os.flush();
-            os.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-    return null;
-}
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">其实可以封装成工具类，上传图片的功能也是。</span><br><span class="line">jsp显示图片用的是：</span><br></pre></td></tr></table></figure>
-<p><img alt="/image/user/alt.jpg" src="http://localhost:8080/xiaoyuantong/user/getuserimage" width="50" height="50"><br><code>`</code><br>直接访问的控制器。</p>
+<h2 id="1-前端上传图片"><a href="#1-前端上传图片" class="headerlink" title="1. 前端上传图片"></a>1. 前端上传图片</h2><p>jsp用表单传值要注明<br><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">enctype</span>=<span class="string">"multipart/form-data"</span></span><br></pre></td></tr></table></figure></p>
+<p>因为要注册注册完的页面的跳转所以用的ajax提交表单，在获取表单时可以使用<br><figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> formData = <span class="keyword">new</span> <span class="type">FormData</span>($(<span class="string">"#registerForm"</span>)[<span class="number">0</span>]);</span><br></pre></td></tr></table></figure></p>
+<p>一次性获取表单数据，就不用一个个append了。<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">data :</span> formData,</span><br><span class="line"><span class="string">processData :</span> <span class="literal">false</span>, <span class="comment">//必须false才会避开jQuery对 formdata 的默认处理   </span></span><br><span class="line"><span class="string">contentType :</span> <span class="literal">false</span>, <span class="comment">//必须false才会自动加上正确的Content-Type</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="2-上传文件的控制器"><a href="#2-上传文件的控制器" class="headerlink" title="2. 上传文件的控制器"></a>2. 上传文件的控制器</h2><p>直接获取文件用<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">RequestParam</span>(<span class="keyword">value</span>="<span class="keyword">file</span>") MultipartFile file</span><br></pre></td></tr></table></figure></p>
+<p>然后依次获取项目路径等等，拼凑文件名存入数据库。然后调用MultipartFile对象的transferTo()方法创建文件到本地磁盘</p>
+<h2 id="3-下载并且输出文件到jsp页面"><a href="#3-下载并且输出文件到jsp页面" class="headerlink" title="3. 下载并且输出文件到jsp页面"></a>3. 下载并且输出文件到jsp页面</h2><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">@RequestMapping(value=<span class="string">"/getuserimage"</span>)</span><br><span class="line">	@ResponseBody</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">String</span> getUserImage(HttpServletRequest request,HttpServletResponse response,Model model) &#123;</span><br><span class="line">		response.setContentType(<span class="string">"/jpeg"</span>);</span><br><span class="line"></span><br><span class="line">		User user = (User) request.getSession().getAttribute(<span class="string">"user"</span>);</span><br><span class="line">		</span><br><span class="line">		<span class="built_in">File</span> file = <span class="keyword">new</span> <span class="built_in">File</span>(user.getImage());</span><br><span class="line">		<span class="built_in">if</span>(file.<span class="built_in">exists</span>()) &#123;</span><br><span class="line">			<span class="built_in">try</span> &#123;</span><br><span class="line">				InputStream in = <span class="keyword">new</span> FileInputStream(user.getImage());</span><br><span class="line">				OutputStream os = response.getOutputStream();</span><br><span class="line">				<span class="keyword">byte</span>[] b = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</span><br><span class="line">				<span class="built_in">while</span>(in.<span class="built_in">read</span>(b) != <span class="number">-1</span>) &#123;</span><br><span class="line">					os.<span class="built_in">write</span>(b);</span><br><span class="line">				&#125;</span><br><span class="line">				in.<span class="built_in">close</span>();</span><br><span class="line">				os.<span class="built_in">flush</span>();</span><br><span class="line">				os.<span class="built_in">close</span>();</span><br><span class="line">			&#125; <span class="built_in">catch</span> (Exception e) &#123;</span><br><span class="line">				e.printStackTrace();</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">return</span> null;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<p>其实可以封装成工具类，上传图片的功能也是。<br>jsp显示图片用的是：<br><code>&lt;img alt=&quot;/image/user/alt.jpg&quot;
+    src=&quot;http://localhost:8080/xiaoyuantong/user/getuserimage&quot; 
+    width=&quot;50&quot; height=&quot;50&quot;/&gt;</code><br>直接访问的控制器。</p>
 <h3 id="因为浏览器是不允许前端直接访问本地磁盘的文件，所以只能把本地文件做输出流到页面显示，使用SpringMVC的控制器。"><a href="#因为浏览器是不允许前端直接访问本地磁盘的文件，所以只能把本地文件做输出流到页面显示，使用SpringMVC的控制器。" class="headerlink" title="因为浏览器是不允许前端直接访问本地磁盘的文件，所以只能把本地文件做输出流到页面显示，使用SpringMVC的控制器。"></a>因为浏览器是不允许前端直接访问本地磁盘的文件，所以只能把本地文件做输出流到页面显示，使用SpringMVC的控制器。</h3><h2 id="服务器问题"><a href="#服务器问题" class="headerlink" title="服务器问题"></a>服务器问题</h2><p>当然最大的坑就是Tomcat重启的时候会删除webapps下面人工生成的文件，导致每次上传图片后过段时间图片就莫名其妙没了，后来找到<a href="https://bbs.csdn.net/topics/391930285" target="_blank" rel="noopener">解决办法</a><br>很多说是只要不把图片文件放在webapps目录下就行，但链接中的方法更便捷，给工程配置虚拟路径，这样Tomcat启动时直接找工程了。</p>
 
       
@@ -603,7 +585,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">1.</span> <span class="nav-text">总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-前端上传图片"><span class="nav-number">1.1.</span> <span class="nav-text">1. 前端上传图片</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#因为浏览器是不允许前端直接访问本地磁盘的文件，所以只能把本地文件做输出流到页面显示，使用SpringMVC的控制器。"><span class="nav-number">1.1.1.</span> <span class="nav-text">因为浏览器是不允许前端直接访问本地磁盘的文件，所以只能把本地文件做输出流到页面显示，使用SpringMVC的控制器。</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#服务器问题"><span class="nav-number">1.2.</span> <span class="nav-text">服务器问题</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">1.</span> <span class="nav-text">总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-前端上传图片"><span class="nav-number">1.1.</span> <span class="nav-text">1. 前端上传图片</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-上传文件的控制器"><span class="nav-number">1.2.</span> <span class="nav-text">2. 上传文件的控制器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-下载并且输出文件到jsp页面"><span class="nav-number">1.3.</span> <span class="nav-text">3. 下载并且输出文件到jsp页面</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#因为浏览器是不允许前端直接访问本地磁盘的文件，所以只能把本地文件做输出流到页面显示，使用SpringMVC的控制器。"><span class="nav-number">1.3.1.</span> <span class="nav-text">因为浏览器是不允许前端直接访问本地磁盘的文件，所以只能把本地文件做输出流到页面显示，使用SpringMVC的控制器。</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#服务器问题"><span class="nav-number">1.4.</span> <span class="nav-text">服务器问题</span></a></li></ol></li></ol></div>
             
 
           </div>
