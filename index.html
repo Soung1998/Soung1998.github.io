@@ -281,6 +281,165 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://Soung1998.github.io/2019/05/12/ajax中文乱码问题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Soung">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/touxiang.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Soung'blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/12/ajax中文乱码问题/" itemprop="url">ajax中文乱码问题</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-12T11:48:39+08:00">
+                2019-05-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ajax/" itemprop="url" rel="index">
+                    <span itemprop="name">ajax</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/05/12/ajax中文乱码问题/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/05/12/ajax中文乱码问题/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="ajax发送中文数据给后端，控制器解析json数据出现乱码"><a href="#ajax发送中文数据给后端，控制器解析json数据出现乱码" class="headerlink" title="ajax发送中文数据给后端，控制器解析json数据出现乱码"></a>ajax发送中文数据给后端，控制器解析json数据出现乱码</h1><p> 解决办法：</p>
+<h2 id="ajax请求格式："><a href="#ajax请求格式：" class="headerlink" title="ajax请求格式："></a>ajax请求格式：</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> searchText = <span class="string">"英语"</span>;</span><br><span class="line">    <span class="comment">//通过URL传递：需要编码两次</span></span><br><span class="line">    searchText = <span class="built_in">encodeURI</span>(searchText);</span><br><span class="line">    searchText = <span class="built_in">encodeURI</span>(searchText);</span><br><span class="line">    $.ajax(&#123;</span><br><span class="line">        type: <span class="string">'GET'</span>,</span><br><span class="line">        url: <span class="string">'search.action'</span> + <span class="string">"?searchText="</span> + searchText,</span><br><span class="line">        data: <span class="string">''</span>,</span><br><span class="line">        contentType: <span class="string">'text/json,charset=utf-8'</span>,</span><br><span class="line">        dataType: <span class="string">'json'</span>,</span><br><span class="line">        success: <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> searchText = <span class="string">"英语"</span>;</span><br><span class="line">    <span class="comment">//通过ajax数据传递：只需编码一次~</span></span><br><span class="line">    searchText = <span class="built_in">encodeURI</span>(searchText);</span><br><span class="line">    $.ajax(&#123;</span><br><span class="line">        type: <span class="string">'GET'</span>,</span><br><span class="line">        url: <span class="string">'search.action'</span>,</span><br><span class="line">        data: &#123;<span class="attr">searchText</span>:searchText&#125;,</span><br><span class="line">        contentType: <span class="string">'text/json,charset=utf-8'</span>,</span><br><span class="line">        dataType: <span class="string">'json'</span>,</span><br><span class="line">        success: <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="后端接收中文数据："><a href="#后端接收中文数据：" class="headerlink" title="后端接收中文数据："></a>后端接收中文数据：</h2><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//都只要反编码一次就行了</span><br><span class="line"><span class="keyword">query</span>Con=URLDecoder.decode(<span class="keyword">query</span>Con,<span class="string">"utf-8"</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="后端返回带中文的json数据："><a href="#后端返回带中文的json数据：" class="headerlink" title="后端返回带中文的json数据："></a>后端返回带中文的json数据：</h2><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//只需对中文的内容进行编码，如果对整个json字符串进行编码，json中的“”等字符也会被编码导致前端解析json错误</span></span><br><span class="line"><span class="selector-tag">URLEncoder</span><span class="selector-class">.encode</span>(<span class="string">"中文内容"</span>,<span class="string">"utf-8"</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="前端解析带中文的json数据："><a href="#前端解析带中文的json数据：" class="headerlink" title="前端解析带中文的json数据："></a>前端解析带中文的json数据：</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$.ajax(&#123;</span><br><span class="line">        type: <span class="string">'GET'</span>,</span><br><span class="line">        url: <span class="string">'search.action'</span>,</span><br><span class="line">        data: &#123;<span class="attr">searchText</span>:searchText&#125;,</span><br><span class="line">        contentType: <span class="string">'text/json,charset=utf-8'</span>,</span><br><span class="line">        dataType: <span class="string">'json'</span>,</span><br><span class="line">        success: <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span><br><span class="line">            <span class="comment">//对应的也只需要对中文进行反编码，例如data.name是中文内容</span></span><br><span class="line">            alert(<span class="built_in">decodeURI</span>(data.name));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="前端的一些编码方法："><a href="#前端的一些编码方法：" class="headerlink" title="前端的一些编码方法："></a>前端的一些编码方法：</h2><p><code>`</code></p>
+<p><script type="text/javascript"><br>    //escape()不能直接用于URL编码，它的真正作用是返回一个字符的Unicode编码值。比如”春节”的返回结果是%u6625%u8282，escape()不对”+”编码 主要用于汉字编码。<br>    alert(escape(“春节”));<br>    alert(unescape(escape(“春节”)));<br>    //encodeURI()是用来对URL编码的函数。 编码整个url地址，但对特殊含义的符号”; / ? : @ &amp; = + $ , #”不进行编码。对应的解码函数是：decodeURI()。<br>    alert(encodeURI(‘<a href="http://baidu.com?hello=您好&amp;word=文档&#39;))">http://baidu.com?hello=您好&amp;word=文档&#39;))</a>;<br>    alert(decodeURI(encodeURI(‘<a href="http://baidu.com?hello=您好&amp;word=文档&#39;)))">http://baidu.com?hello=您好&amp;word=文档&#39;)))</a>;<br>    //encodeURIComponent() 能编码”; / ? : @ &amp; = + $ , #”这些特殊字符。对应的解码函数是decodeURIComponent()。<br>    alert(encodeURIComponent(‘<a href="http://baidu.com?hello=您好&amp;word=文档&#39;))">http://baidu.com?hello=您好&amp;word=文档&#39;))</a>;<br>    alert(decodeURIComponent(encodeURIComponent(‘<a href="http://baidu.com?hello=您好&amp;word=文档&#39;)))">http://baidu.com?hello=您好&amp;word=文档&#39;)))</a>;<br></script><br>总结：<br>escape：已经废弃，不推荐使用！！！，而且无法对“/”编码，服务器会报错<br>encodeURIComponent：传递参数时需要使用encodeURIComponent，推荐使用<br>encodeURI：用来对请求的URL编码的，不是对请求的参数编码。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://Soung1998.github.io/2019/04/17/ssm-图片上传/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1676,166 +1835,13 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://Soung1998.github.io/2019/03/05/使用GitPages-Hexo搭建并开通博客/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Soung">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/touxiang.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Soung'blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/03/05/使用GitPages-Hexo搭建并开通博客/" itemprop="url">使用GitPages+Hexo搭建并开通博客</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-05T16:20:57+08:00">
-                2019-03-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/博客制作/" itemprop="url" rel="index">
-                    <span itemprop="name">博客制作</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/03/05/使用GitPages-Hexo搭建并开通博客/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/03/05/使用GitPages-Hexo搭建并开通博客/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="博客制作总结"><a href="#博客制作总结" class="headerlink" title="博客制作总结"></a>博客制作总结</h1><h2 id="参考B站教学视频"><a href="#参考B站教学视频" class="headerlink" title="参考B站教学视频"></a>参考B站教学视频</h2><p><a href="https://www.bilibili.com/video/av24897960/" target="_blank" rel="noopener">手把手教你搭建属于自己的hexo+github博客</a><br><a href="https://www.bilibili.com/video/av17653359/" target="_blank" rel="noopener">使用Next主题来进行优化改造</a></p>
-<h2 id="1、工具准备：node-js和Git的安装"><a href="#1、工具准备：node-js和Git的安装" class="headerlink" title="1、工具准备：node.js和Git的安装"></a>1、工具准备：node.js和Git的安装</h2><h2 id="2、安装-Sublime-text-3作为编辑各种文件的工具"><a href="#2、安装-Sublime-text-3作为编辑各种文件的工具" class="headerlink" title="2、安装 Sublime text 3作为编辑各种文件的工具"></a>2、安装 Sublime text 3作为编辑各种文件的工具</h2>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/03/05/使用GitPages-Hexo搭建并开通博客/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
 
 
           </div>
@@ -1881,7 +1887,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1892,7 +1898,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -1903,7 +1909,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
